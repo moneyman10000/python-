@@ -1,0 +1,32 @@
+from flask import Flask, render_template, request
+app = Flask(__name__)
+
+# Define the questions for the questionnaire
+questions = {
+    'depression': [
+        "Do you feel sad or empty?",
+        "Have you lost interest in activities you once enjoyed?",
+        # ... other questions for depression
+    ],
+    'ocd': [
+        "Do you have recurrent thoughts that cause you anxiety?",
+        "Do you feel the need to perform certain routines repeatedly?",
+        # ... other questions for OCD
+    ],
+    # ... other categories
+}
+
+@app.route('/')
+def questionnaire():
+    return render_template('questionnaire.html', questions=questions)
+
+@app.route('/submit', methods=['POST'])
+def submit():
+    answers = request.form
+    # Algorithm to analyze answers and determine potential disorder
+    # This is a placeholder for the analysis logic
+    result = 'Analysis result based on answers'
+    return render_template('result.html', result=result)
+
+if __name__ == '__main__':
+    app.run(debug=True)
